@@ -1,6 +1,6 @@
 {
     "name": "No Framework app",
-    "description": "Simple No Framework app",
+    "description": "Simple No Framework app based on tut from PatrickLouys https://github.com/PatrickLouys/no-framework-tutorial",
     "keywords": ["Your keyword", "Another keyword"],
     "license": "MIT",
     "authors": [
