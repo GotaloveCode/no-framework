@@ -33,6 +33,14 @@ $injector->alias('Example\Template\FrontendRenderer', 'Example\Template\Frontend
 $injector->alias('Example\Menu\MenuReader', 'Example\Menu\ArrayMenuReader');
 $injector->share('Example\Menu\ArrayMenuReader');
 
+$injector->share('PDO');
+$injector->define('PDO', [
+    ':dsn' => 'mysql:dbname=testdb;host=127.0.0.1',
+    ':username' => 'master_user',
+    ':passwd' => 'test'
+]);
+
+
 
 
 return $injector;

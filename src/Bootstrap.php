@@ -23,6 +23,7 @@ $whoops = new \Whoops\Run;
 $injector = include('Dependencies.php');
 $request = $injector->make('Http\HttpRequest');
 $response = $injector->make('Http\HttpResponse');
+$pdo = $injector->make('PDO');
 
 
 if ($environment !== 'production') {
@@ -46,7 +47,7 @@ $dispatcher = \FastRoute\simpleDispatcher($routeDefinitionCallback);
 $routeInfo = $dispatcher->dispatch($request->getMethod(), $request->getPath());
 switch ($routeInfo[0]) {
     case \FastRoute\Dispatcher::NOT_FOUND:
-        $response->setContent('404 - Page not found');
+        $response->setContent('404 - Page not found'.$routeInfo[0]);
         $response->setStatusCode(404);
         break;
     case \FastRoute\Dispatcher::METHOD_NOT_ALLOWED:
