@@ -3,12 +3,31 @@ namespace Example\Models;
 
 use PDO;
 
-class User 
+class User
 {
-    public function __construct($slug, $code = 0, Exception $previous = null)
+    private $pdo;
+
+    public function __construct( PDO $pdo)
     {
-        $message = "No page with the slug `$slug` was found";
-        parent::__construct($message, $code, $previous);
+        $this->pdo = $pdo;
+    }
+    public function find($userid) {
+        $query = 'SELECT * FROM user WHERE id = :userid';
+
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(':userid', $userid);
+
+        $stmt->setFetchMode(PDO::FETCH_CLASS, 'Model\\Entities\\House');
+        $stmt->execute();
+        $user = $stmt->fetch(PDO::FETCH_CLASS);
+
+        if (false === $user) {
+            throw new RecordNotFoundException(
+                'No user exist for the specified ID'
+            );
+        }
+
+        return $user;
     }
 }
 

@@ -6,6 +6,7 @@ use Http\Request;
 use Http\Response;
 use PDO;
 use Example\Template\FrontendRenderer;
+use Example\Models;
 
 class Homepage
 {
